@@ -40,27 +40,9 @@ def agregar_personaje(matriz: list) -> bool:
     """
     print("Ingrese los datos del nuevo personaje:")
     
-    nombre_heroe = ingreso_string("Nombre del héroe: ","Error: El nombre no puede estar vacío ni exceder los 50 caracteres.", 1, 50)
-    alias = ingreso_string("Alias: ","Error: El alias no puede estar vacío ni exceder los 30 caracteres.", 1, 30)
-    # Falta crear funcion para conseguir la lista de razas y crear el ingreso y validacion de la raza
-    lista_razas = conseguir_cadena_unicas(matriz,2)
-    mensaje_raza = f"Ingrese raza : {lista_razas}"
-    raza = ingreso_string("Raza: ","Error: La raza no puede estar vacía ni exceder los 20 caracteres.", lista_razas)
-    # -----------------------------------------------------
-    genero = input("Género: ")
-    poder = ingreso_entero("Ingrese el poder (1-100): ","Error: Debe ingresar un número entre 1 y 100.", 1, 100)
-    inteligencia = ingreso_entero("Ingrese el inteligencia (1-100): ","Error: Debe ingresar un número entre 1 y 100.", 1, 100)
-    velocidad = ingreso_entero("Ingrese el velocidad (1-100): ","Error: Debe ingresar un número entre 1 y 100.", 1, 100)
-
-    nuevo_personaje = [
-        nombre_heroe,
-        alias,
-        raza,
-        genero,
-        poder,
-        inteligencia,
-        velocidad
-    ]
+    
+    nuevo_personaje = ingresar_informacion_personaje(matriz)
+    
     tamanio_inicial = len(matriz)
     matriz.append(nuevo_personaje)
     if tamanio_inicial == len(matriz):
@@ -70,7 +52,46 @@ def agregar_personaje(matriz: list) -> bool:
         print("Personaje agregado exitosamente.")
         return True
     
+def ingresar_informacion_personaje(matriz : list) -> list:
+    """Solicita al usuario que ingrese información para un nuevo personaje.
+    Args:
+        matriz (list): Matriz principal de personajes.
+
+    Returns:
+        list: Lista con la información del nuevo personaje.
+    """
+    # Solicitar y validar cada dato del personaje
+    nombre_heroe = ingreso_string("Nombre del héroe: ","Error: El nombre no puede estar vacío ni exceder los 50 caracteres.", 1, 50)
+    alias = ingreso_string("Alias: ","Error: El alias no puede estar vacío ni exceder los 30 caracteres.", 1, 30)
+    raza = ingreso_de_informacion_especifica(matriz, 2, "Ingrese la raza: ", "Error: Raza no válida.")
+    genero = ingreso_de_informacion_especifica(matriz, 3, "Ingrese el género: ", "Error: Género no válido.")
+    poder = ingreso_entero("Ingrese el poder (1-100): ","Error: Debe ingresar un número entre 1 y 100.", 1, 100)
+    inteligencia = ingreso_entero("Ingrese el inteligencia (1-100): ","Error: Debe ingresar un número entre 1 y 100.", 1, 100)
+    velocidad = ingreso_entero("Ingrese el velocidad (1-100): ","Error: Debe ingresar un número entre 1 y 100.", 1, 100)
     
+    return [nombre_heroe, alias, raza, genero, poder, inteligencia, velocidad]
+    
+def ingreso_de_informacion_especifica(matriz: list, indice: int, mensaje: str, mensaje_error: str) -> str:
+    """Solicita al usuario que ingrese una raza y la valida.
+
+    Args:
+        matriz (list): Matriz principal de personajes.
+        indice (int): Índice de la columna que contiene la información buscada.
+        mensaje (str): Mensaje que se muestra al usuario para solicitar el ingreso.
+        mensaje_error (str): Mensaje que se muestra en caso de error.
+
+    Returns:
+        str: Raza ingresada y validada.
+    """
+    limpiar_pantalla()
+    lista = conseguir_cadena_unicas(matriz, indice)
+    print("Opciones disponibles:")
+    for elemento in lista:
+        print(f"- {elemento}")
+    data = input(mensaje)
+    data = validar_string_lista(data, mensaje_error, lista)
+    return data
+
 def conseguir_cadena_unicas(matriz: list, columna: int) -> list:
     """Obtiene una lista de cadenas únicas de una columna específica en la matriz.
 
@@ -87,3 +108,34 @@ def conseguir_cadena_unicas(matriz: list, columna: int) -> list:
         if valor not in cadenas_unicas:
             cadenas_unicas.append(valor)
     return cadenas_unicas
+
+def mostrar_personajes(matriz: list) -> bool:
+    """Muestra la matriz de personajes en un formato legible.
+
+    Args:
+        matriz (list): Matriz principal de personajes.
+    Returns:
+        bool: True si la matriz se mostró correctamente, False si estaba vacía.
+    """
+    if len(matriz) == 0:
+        print("La matriz está vacía.")
+        return False
+    
+    for personaje in matriz:
+        mostrar_personaje(personaje)
+    return True
+        
+def mostrar_personaje(personaje: list) -> None:
+    """Muestra la información de un personaje en un formato legible.
+
+    Args:
+        personaje (list): Lista con la información del personaje.
+    """
+    print(f"Nombre del héroe: {personaje[0]}")
+    print(f"Alias: {personaje[1]}")
+    print(f"Raza: {personaje[2]}")
+    print(f"Género: {personaje[3]}")
+    print(f"Poder: {personaje[4]}")
+    print(f"Inteligencia: {personaje[5]}")
+    print(f"Velocidad: {personaje[6]}")
+    print("-" * 40)

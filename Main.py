@@ -5,31 +5,36 @@ from Menu import menu
 def main():
     """Función principal del programa que maneja el menú y las opciones del usuario.
     """
+    matriz_personajes = []
     while True:
+        
+        opcion = menu()
+        
+        if opcion == 1:
+            matriz_personajes = crear_matriz_de_personajes()
+            print("Matriz de personajes creada exitosamente.")
+        if len(matriz_personajes) == 0:
+            print("Error: Primero debe crear la matriz de personajes.")
+            input("Presione Enter para continuar...")
+        
+        elif opcion == 2:
+            if 'matriz_personajes' in locals():
+                agregar_personaje(matriz_personajes)
+            else:
+                print("Error: Primero debe crear la matriz de personajes.")
+                
+        elif opcion == 3:
+            print(matriz_personajes)
+            print("Opción 3 seleccionada.")
+        elif opcion == 4:
+            mostrar_personajes(matriz_personajes)
+        elif opcion == 22:
+            print("Saliendo del programa...")
+            break
+        else:
+            print("Opción no válida. Intente nuevamente.")
+        input("Presione Enter para continuar...")    
         limpiar_pantalla()
-        match menu():
-            case 1:
-                print("Crear matriz")
-            case 2:
-                print("Agregar personaje")
-            case 22:
-                print("Salir")
-                break
-            case _:
-                print("Opción inválida. Intente nuevamente.")
-                continue
+        
 
-matriz_personajes = crear_matriz_de_personajes()
-lista_razas = conseguir_cadena_unicas(matriz_personajes, 2)
-lista_genero = conseguir_cadena_unicas(matriz_personajes, 3)
-
-
-for raza in lista_razas:
-    print(raza)
-    
-input("Presione Enter para continuar...\n\n")
-
-limpiar_pantalla()
-print("\n\n\n")
-for genero in lista_genero:
-    print(genero)
+main()

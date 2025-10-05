@@ -40,6 +40,7 @@ def ingreso_string(mensaje: str, mensaje_error: str,
     """
     cadena = input(mensaje)
     cadena = validar_string(cadena, mensaje_error, largo_min, largo_max)
+    return cadena
     
 def validacion_entero(numero: int, mensaje_error: str,  minimo: int = None, maximo: int = None) -> int:
     """
@@ -72,6 +73,22 @@ def validar_string(cadena: str, mensaje_error: str, largo_min: int = None, largo
         str: Cadena de texto validada.
     """
     while (largo_min is not None and len(cadena) < largo_min) or (largo_max is not None and len(cadena) > largo_max):
+        print(mensaje_error)
+        cadena = input("Reingrese: ")
+    return cadena
+
+def validar_string_lista(cadena: str, mensaje_error: str, lista_validos: list) -> str:
+    """Valida si una cadena de texto pertenece a una lista de cadenas válidas.
+
+    Args:
+        cadena (str): Cadena de texto a validar.
+        mensaje_error (str): Mensaje que se muestra en caso de error.
+        lista_validos (list): Lista de cadenas válidas.
+
+    Returns:
+        str: Cadena de texto validada.
+    """
+    while cadena not in lista_validos:
         print(mensaje_error)
         cadena = input("Reingrese: ")
     return cadena
