@@ -110,3 +110,28 @@ def convertir_entero(numero: str) -> int:
         return -1
     
     return int(numero)
+
+        
+def mostrar_quince_caracteres(matriz: list) -> None:
+    """Muestra los primeros 15 caracteres de cada cadena en la matriz.
+
+    Args:
+        matriz (list): Matriz principal de personajes.
+    """
+    for fila in matriz:
+        print(mostrar_personaje_quince_caracteres(fila))
+        
+
+def mostrar_personaje_quince_caracteres(personaje: list) -> str:
+    """Muestra los primeros 15 caracteres de cada atributo de un personaje.
+
+    Args:
+        personaje (list): Lista que representa un personaje.
+    """
+    data = ""
+    for i in range(len(personaje)):
+        data += str(personaje[i]) + "|"
+    return data[:15]
+    
+            
+            

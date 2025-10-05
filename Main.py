@@ -28,6 +28,9 @@ def main():
             print("Opción 3 seleccionada.")
         elif opcion == 4:
             mostrar_personajes(matriz_personajes)
+        elif opcion == 5:
+            mostrar_quince_caracteres(matriz_personajes)
+            
         elif opcion == 22:
             print("Saliendo del programa...")
             break

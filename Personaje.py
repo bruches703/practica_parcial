@@ -139,3 +139,25 @@ def mostrar_personaje(personaje: list) -> None:
     print(f"Inteligencia: {personaje[5]}")
     print(f"Velocidad: {personaje[6]}")
     print("-" * 40)
+    
+def mostrar_quince_caracteres(matriz: list) -> None:
+    """Muestra los primeros 15 caracteres de cada cadena en la matriz.
+
+    Args:
+        matriz (list): Matriz principal de personajes.
+    """
+    for fila in matriz:
+        mostrar_personaje_quince_caracteres(fila)
+        
+
+def mostrar_personaje_quince_caracteres(personaje: list) -> None:
+    """Muestra los primeros 15 caracteres de cada atributo de un personaje.
+
+    Args:
+        personaje (list): Lista que representa un personaje.
+    """
+    # data = ""
+    # for i in range(len(personaje)):
+    #     data += str(personaje[i]) + ","
+    # print (data[:15] + "...")
+    print(f"{personaje[0][:15]},{personaje[1][:15]},{personaje[2][:15]},{personaje[3][:15]},{str(personaje[4])[:15]},{str(personaje[5])[:15]},{str(personaje[6])[:15]} ...")
